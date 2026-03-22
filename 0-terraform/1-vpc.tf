@@ -22,3 +22,16 @@ resource "aws_subnet" "Public_main" {
         Name = "Public-main"
     }
 }
+
+resource "aws_route_table" "public_main_rt" {
+    vpc_id = aws_vpc.main.id
+
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.gw_vpc_main.id
+    }
+
+    tags = {
+        Name = "public-main-rt"
+    }
+}
