@@ -2,6 +2,7 @@ resource "aws_instance" "main_ec2" {
     ami = "ami-02dfbd4ff395f2a1b"
     instance_type = "t3.micro"
     subnet_id = aws_subnet.Public_main.id
+    vpc_security_group_ids = [aws_security_group.web_sg.id]
 
     user_data =<<-EOT
         sudo su

@@ -36,6 +36,11 @@ resource "aws_route_table" "public_main_rt" {
     }
 }
 
+resource "aws_route_table_association" "public_main_asso" {
+    subnet_id = aws_subnet.Public_main.id
+    route_table_id = aws_route_table.public_main_rt.id
+}
+
 resource "aws_security_group" "web_sg" {
     vpc_id = aws_vpc.main.id
     name = "web-sg"
@@ -45,14 +50,14 @@ resource "aws_security_group" "web_sg" {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     ingress {
         from_port = 443
         to_port = 443
         protocol = "tcp"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     tags = {
