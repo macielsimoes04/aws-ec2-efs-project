@@ -35,3 +35,31 @@ resource "aws_route_table" "public_main_rt" {
         Name = "public-main-rt"
     }
 }
+
+resource "aws_security_group" "web_sg" {
+    vpc_id = aws_vpc.main.id
+    name = "web-sg"
+    description = "Allow inbound HTTP (80) and HTTPS (443) traffic"
+
+    tags = {
+        Name = "web-sg"
+    }
+}
+
+resource "aws_security_group_rule" "allow_http"{
+    security_group_id = aws_security_group.web_sg.id
+    type = "ingress"
+    cidr_block = ["0.0.0.0/0"]
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+}
+
+resource "aws_security_group_rule" "allow_https"{
+    security_group_id = aws_security_group.web_sg.id
+    type = "ingress"
+    cidr_block = ["0.0.0.0/0"]
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+}
