@@ -47,20 +47,13 @@ resource "aws_route_table_association" "public_main_asso" {
 resource "aws_security_group" "web_sg" {
     vpc_id = aws_vpc.main.id
     name = "web-sg"
-    description = "Allow inbound HTTP (80) and HTTPS (443) traffic"
+    description = "Allow inbound HTTP (80) traffic"
 
     ingress {
         from_port = 80
         to_port = 80
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
     }
 
     egress {
