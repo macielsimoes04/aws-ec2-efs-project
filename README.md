@@ -2,18 +2,18 @@
 
 ![AWS Architecture](images/68747470733a2f2f69302e77702e636f6d2f736b756e64756e6f7465732e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f31312f35332d696d6167652d302e706e673f6669743d313230302532433637332673736c3d31.webp)
 
-##
-Before running Terraform, configure your AWS credentials locally:
+## AWS Configuration
+Before running Terraform, configure your AWS credentials locally using the AWS CLI:
 ```bash
-aws configure --profile $profile
+aws configure --profile terraform-admin
 ```
 
 ## Installation of providers
 This project uses the AWS provider with a locally configured profile.
 ```hcl
 provider "aws" {
-    profile = "$profile"
-    region = "$region"
+    profile = "terraform-admin"
+    region = "us-east-1"
 }
 
 terraform {
@@ -155,7 +155,7 @@ terraform init
 terraform plan
 
 # Apply the configuration (create resources)
-terraform apply -auto--approve
+terraform apply -auto-approve
 ```
 
 # Summary
